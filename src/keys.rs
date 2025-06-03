@@ -101,6 +101,38 @@ impl XmlSecKey
         Ok(Self(key))
     }
 
+    /// Load DES key from binary file
+    pub fn from_des_file(path: &str) -> XmlSecResult<Self>
+    {
+        crate::xmlsec::guarantee_xmlsec_init();
+
+        let cpath = CString::new(path).unwrap();
+
+        let key = unsafe { bindings::xmlSecKeyReadBinaryFile(bindings::xmlSecOpenSSLKeyDataDesGetKlass(), cpath.as_ptr()) };
+
+        if key.is_null() {
+            return Err(XmlSecError::KeyLoadError);
+        }
+
+        Ok(Self(key))
+    }
+
+    /// Load AES key from binary file
+    pub fn from_aes_file(path: &str) -> XmlSecResult<Self>
+    {
+        crate::xmlsec::guarantee_xmlsec_init();
+
+        let cpath = CString::new(path).unwrap();
+
+        let key = unsafe { bindings::xmlSecKeyReadBinaryFile(bindings::xmlSecOpenSSLKeyDataAesGetKlass(), cpath.as_ptr()) };
+
+        if key.is_null() {
+            return Err(XmlSecError::KeyLoadError);
+        }
+
+        Ok(Self(key))
+    }
+
     /// Load certificate into key by specifying path and ints format.
     pub fn load_cert_from_file(&self, path: &str, format: XmlSecKeyFormat) -> XmlSecResult<()>
     {

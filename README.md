@@ -2,6 +2,11 @@
 
 This library aims at wrapping xmlsec1 and being interoperable with [rust-libxml](https://github.com/KWARC/rust-libxml), while attemting to be as correct and comfortable to use as possible.
 
+## Features
+
+- XML Digital Signature
+- XML Encryption (AES-128-CBC, AES-256-CBC, RSA v1.5 and RSA-OAEP)
+
 ## Things needing improvement
 
 - Better input sanitization of string arguments. Currently they get blindly turned into a FFI version and passed through to xmlsec.
@@ -10,7 +15,6 @@ This library aims at wrapping xmlsec1 and being interoperable with [rust-libxml]
 
 ## Things not yet supported
 
-- XML encryption.
 - Key management (as in xmlsec key manager). Though the value of wrapping that should be debated first. It may be more sensible to lift that to pure Rust instead.
 - Dynamic selection of crypto backend.
 
