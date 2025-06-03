@@ -23,6 +23,8 @@ pub enum XmlSecError
 
     SigningError,
     VerifyError,
+    EncryptionError,
+    DecryptionError,
 }
 
 
@@ -42,6 +44,8 @@ impl std::fmt::Display for XmlSecError
 
             Self::SigningError => write!(fmt, "An error has ocurred while attemting to sign document"),
             Self::VerifyError  => write!(fmt, "Verification process failed"),
+            Self::EncryptionError => write!(fmt, "Encryption process failed"),
+            Self::DecryptionError => write!(fmt, "Decryption process failed"),
         }
     }
 }
